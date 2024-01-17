@@ -8,7 +8,6 @@ This is an react.js application to generate UEFA Champions League matches, with 
 
 ### Links
 
-- Solution URL: [https://www.frontendmentor.io/solutions/ecommerce-product-page-with-react-and-tailwind-7UL7fz7tcg](https://www.frontendmentor.io/solutions/ecommerce-product-page-with-react-and-tailwind-7UL7fz7tcg)
 - Live Site URL: [https://polite-crepe-fdbcd1.netlify.app/](https://polite-crepe-fdbcd1.netlify.app/)
 
 ## Note
