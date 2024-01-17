@@ -1,30 +1,20 @@
-# React + TypeScript + Vite
+# Champions League - Random matches generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is an react.js application to generate UEFA Champions League matches, with results based on the current form of each team
 
-Currently, two official plugins are available:
+### Screenshot
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![](./screenshot_desktop.png)
 
-## Expanding the ESLint configuration
+### Links
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Solution URL: [https://www.frontendmentor.io/solutions/ecommerce-product-page-with-react-and-tailwind-7UL7fz7tcg](https://www.frontendmentor.io/solutions/ecommerce-product-page-with-react-and-tailwind-7UL7fz7tcg)
+- Live Site URL: [https://polite-crepe-fdbcd1.netlify.app/](https://polite-crepe-fdbcd1.netlify.app/)
 
-- Configure the top-level `parserOptions` property like this:
+## Note
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+This is for educational and entertainment purposes, all rights reserved belong to [UEFA](https://www.uefa.com/).
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Author
+
+- Website - [Samuel Figueroa](https://sfweb.netlify.app/)
