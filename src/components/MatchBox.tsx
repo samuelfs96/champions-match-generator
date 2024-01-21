@@ -18,21 +18,24 @@ export default function MatchBox({ teamA, teamB }: MatchBoxProps) {
           </h1>
         </div>
       </div>
+      <div className="relative flex flex-col items-center">
       <div className="flex justify-center items-center">
         <div
           className={`bg-[#fe30fd80] w-10 h-12 flex justify-center items-center -skew-x-12 [&>*]:skew-x-12`}
         >
-          <span className="text-white text-2xl font-mono font-bold">
+          <span className="text-white text-2xl font-bold">
             {teamA.score}
           </span>
         </div>
         <div
           className={`bg-white w-10 h-12 flex justify-center items-center -skew-x-12 [&>*]:skew-x-12`}
         >
-          <span className="text-[#81209b] text-2xl font-mono font-bold">
+          <span className="text-[#81209b] text-2xl font-bold">
             {teamB.score}
           </span>
         </div>
+      </div>
+      {/* <p className="text-white text-sm font-bold absolute bottom-[-50%]">FT'</p> */}
       </div>
       <div className="flex justify-center items-center">
         <div className="flex items-center flex-col gap-1">
