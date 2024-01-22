@@ -1,49 +1,11 @@
 import "./App.css";
 import MatchBox from "./components/MatchBox";
-import { useCallback, useState } from "react";
-import { Instances } from "./types/instances";
+import { useMatchup } from "./hooks/useMatchup";
 import { teams } from "./teams";
-import { Matchup, Team } from "./types/team";
+import { Matchup } from "./types/team";
 
 function App() {
-  const [instance, setInstance] = useState("");
-  const [matchups, setMatchups] = useState<Matchup[]>([]);
-  const [currentTeams, setCurrentTeams] = useState<Team[]>([...teams]);
-  const handleSetMatchups: VoidFunction = useCallback(() => {
-    const bracket0Teams: Team[] = currentTeams.filter(
-      (team: Team) => team.bracket === 0
-    );
-    const bracket1Teams: Team[] = currentTeams.filter(
-      (team: Team) => team.bracket === 1
-    );
-    if (bracket0Teams.length !== 0 && bracket1Teams.length !== 0) {
-      const randomIndexA: number = Math.floor(
-        Math.random() * bracket0Teams.length
-      );
-      const randomIndexB: number = Math.floor(
-        Math.random() * bracket1Teams.length
-      );
-      const availableteams: Team[] = currentTeams.filter(
-        (team: Team) =>
-          team.name !== bracket0Teams[randomIndexA].name &&
-          team.name !== bracket1Teams[randomIndexB].name
-      );
-      setCurrentTeams([...availableteams]);
-      setMatchups([
-        ...matchups,
-        {
-          teamA: bracket0Teams[randomIndexA],
-          teamB: bracket1Teams[randomIndexB],
-          scoreA: 0,
-          scoreB: 0,
-        },
-      ]);
-      setInstance(Instances.ROUND16);
-    }
-  }, [matchups, currentTeams]);
-
-  console.log(matchups);
-
+  const { handleSetMatchups, instance, matchups } = useMatchup(teams);
   return (
     <div className="bg-bgchampions w-screen h-screen bg-contain bg-center flex flex-col items-center justify-center">
       <h1 className=" text-white mb-2 uppercase font-bold flex flex-col">
