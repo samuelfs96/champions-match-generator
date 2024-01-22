@@ -3,12 +3,23 @@ import { Team } from "../types/team";
 interface MatchBoxProps {
   teamA: Team;
   teamB: Team;
+  scoreA: number;
+  scoreB: number;
+  isFinal?: boolean;
 }
 
-export default function MatchBox({ teamA, teamB }: MatchBoxProps) {
+export default function MatchBox({
+  teamA,
+  teamB,
+  scoreA,
+  scoreB,
+  isFinal = false,
+}: MatchBoxProps) {
   return (
     <div
-      className={`flex justify-between items-center border-[#fe30fd80] border-[1px] px-8 py-4 gap-12 -skew-x-12 [&>*]:skew-x-12`}
+      className={`flex justify-between items-center ${
+        isFinal ? "bg-[#81209b]" : ""
+      } border-[#81209b] border-[1px] px-8 py-4 gap-12 -skew-x-12 [&>*]:skew-x-12`}
     >
       <div className="flex justify-center items-center">
         <div className="flex items-center flex-col gap-1">
@@ -19,23 +30,19 @@ export default function MatchBox({ teamA, teamB }: MatchBoxProps) {
         </div>
       </div>
       <div className="relative flex flex-col items-center">
-      <div className="flex justify-center items-center">
-        <div
-          className={`bg-[#fe30fd80] w-10 h-12 flex justify-center items-center -skew-x-12 [&>*]:skew-x-12`}
-        >
-          <span className="text-white text-2xl font-bold">
-            {teamA.score}
-          </span>
+        <div className="flex justify-center items-center">
+          <div
+            className={`bg-[#fe30fd80] w-10 h-12 flex justify-center items-center -skew-x-12 [&>*]:skew-x-12`}
+          >
+            <span className="text-white text-2xl font-bold">{scoreA}</span>
+          </div>
+          <div
+            className={`bg-white w-10 h-12 flex justify-center items-center -skew-x-12 [&>*]:skew-x-12`}
+          >
+            <span className="text-[#81209b] text-2xl font-bold">{scoreB}</span>
+          </div>
         </div>
-        <div
-          className={`bg-white w-10 h-12 flex justify-center items-center -skew-x-12 [&>*]:skew-x-12`}
-        >
-          <span className="text-[#81209b] text-2xl font-bold">
-            {teamB.score}
-          </span>
-        </div>
-      </div>
-      {/* <p className="text-white text-sm font-bold absolute bottom-[-50%]">FT'</p> */}
+        {/* <p className="text-white text-sm font-bold absolute bottom-[-50%]">FT'</p> */}
       </div>
       <div className="flex justify-center items-center">
         <div className="flex items-center flex-col gap-1">
