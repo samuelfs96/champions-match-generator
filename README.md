@@ -8,7 +8,7 @@ This is an react.js application to generate UEFA Champions League matches, with 
 
 ### Links
 
-- Live Site URL: [https://polite-crepe-fdbcd1.netlify.app/](https://polite-crepe-fdbcd1.netlify.app/)
+- Live Site URL: [https://champions-match-generator.netlify.app/](https://champions-match-generator.netlify.app/)
 
 ## Note
 
