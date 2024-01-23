@@ -16,9 +16,11 @@ export function filterTeamsByBracket(teams: Team[], bracket: number): Team[] {
 }
 
 export function filterTeamsByWinner(matchups: Matchup[]): Team[] {
-  return shuffleTeams(matchups.map((matchup: Matchup) => {
-    return matchup.scoreA > matchup.scoreB ? matchup.teamA : matchup.teamB;
-  }));
+  return shuffleTeams(
+    matchups.map((matchup: Matchup) => {
+      return matchup.scoreA > matchup.scoreB ? matchup.teamA : matchup.teamB;
+    })
+  );
 }
 
 export function createMatchup(teamA: Team, teamB: Team): Matchup {
@@ -41,5 +43,30 @@ export function handleNextInstance(current: string): string {
       return Instances.FINAL;
     default:
       return Instances.ROUND16;
+  }
+}
+
+export function matchkeys(instance: string): number[][] {
+  switch (instance) {
+    case Instances.ROUND16:
+      return [
+        [0, 4],
+        [4, 8],
+      ];
+    case Instances.QUARTER:
+      return [
+        [0, 2],
+        [2, 4],
+      ];
+    case Instances.SEMIS:
+      return [
+        [0, 1],
+        [1, 2],
+      ];
+    default:
+      return [
+        [0, 4],
+        [4, 8],
+      ];
   }
 }
