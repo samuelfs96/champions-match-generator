@@ -4,13 +4,10 @@ import { Instances } from "../types/instances";
 import {
   createMatchup,
   filterTeamsByBracket,
+  filterTeamsByWinner,
+  getRandomNumber,
+  handleNextInstance,
 } from "../utils";
-
-function getRandomNumber(min: number, max: number): number {
-  const range: number = max - min;
-  const randomNumber: number = Math.floor(Math.random() * range);
-  return randomNumber + min;
-}
 
 function getForm(wins: number, losses: number, played: number) {
   const totalMatches: number = wins + losses;
@@ -20,22 +17,38 @@ function getForm(wins: number, losses: number, played: number) {
   return (wins / totalMatches) * played;
 }
 
-export function useMatchup(teams: Team[]) {
-  const [instance, setInstance] = useState(Instances.ROUND16);
-  const [matchups, setMatchups] = useState<Matchup[]>([]);
-  const [currentTeams, setCurrentTeams] = useState<Team[]>([...teams]);
-  const [activeRandomizerResults, setActiveRandomizerResults] = useState(false);
+function getNewMatchups(teams: Team[]) {
+  const newArray: Matchup[] = [];
+  for (let i: number = 0; i < teams.length; i += 2) {
+    if (i + 1 < teams.length) {
+      newArray.push(createMatchup(teams[i], teams[i + 1]));
+    }
+  }
+  return newArray;
+}
 
-  const handleSetMatchups: CallableFunction = useCallback(() => {
-    const bracket0Teams: Team[] = filterTeamsByBracket(currentTeams, 0);
-    const bracket1Teams: Team[] = filterTeamsByBracket(currentTeams, 1);
-    const allMatchups: Matchup[] = bracket0Teams.map((teamA: Team, idx: number) => {
-      return createMatchup(teamA, bracket1Teams[idx]);
-    });
-    setMatchups(allMatchups);
-    setInstance(Instances.ROUND16);
-    setActiveRandomizerResults(true);
-  }, [currentTeams]);
+export function useMatchup(teams: Team[]) {
+  const [instance, setInstance] = useState<string>(Instances.ROUND16);
+  const [matchups, setMatchups] = useState<Matchup[]>([]);
+  const [activeRandomizerResults, setActiveRandomizerResults] =
+    useState<boolean>(false);
+
+  const handleSetMatchups: CallableFunction = useCallback(
+    (next: boolean) => {
+      const bracket0Teams: Team[] = filterTeamsByBracket(teams, 0);
+      const bracket1Teams: Team[] = filterTeamsByBracket(teams, 1);
+      const winningTeams: Team[] = filterTeamsByWinner(matchups);
+      const allMatchups: Matchup[] = next
+        ? getNewMatchups(winningTeams)
+        : bracket0Teams.map((teamA: Team, idx: number) => {
+            return createMatchup(teamA, bracket1Teams[idx]);
+          });
+      if (next) setInstance(handleNextInstance);
+      setMatchups(allMatchups);
+      setActiveRandomizerResults(true);
+    },
+    [teams, matchups]
+  );
 
   const handleRandomizeResults: CallableFunction = useCallback(() => {
     const updatedMatchups: Matchup[] = matchups.map((matchup: Matchup) => {
