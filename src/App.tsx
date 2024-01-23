@@ -32,7 +32,7 @@ function App() {
         </div>
 
         {activeRandomizerResults ? (
-          <div className="fixed bottom-10 bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)] hover:shadow-none transition-all">
+          <div className="fixed bottom-10 bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)] hover:shadow-[-5px_5px_0_0_rgba(254,48,253,0.5)] transition-all">
             <button
               className="px-8 py-4 text-[#81209b] uppercase text-sm"
               onClick={() => handleRandomizeResults()}
@@ -41,7 +41,7 @@ function App() {
             </button>
           </div>
         ) : (
-          <div className="fixed bottom-10 bg-[#81209b] -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_white] hover:shadow-none transition-all">
+          <div className="fixed bottom-10 bg-[#81209b] -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_white] hover:shadow-[-5px_5px_0_0_white] transition-all">
             <button
               className="px-8 py-4 text-white  uppercase text-sm"
               onClick={() => handleSetMatchups()}
