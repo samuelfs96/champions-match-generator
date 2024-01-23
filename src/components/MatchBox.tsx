@@ -32,7 +32,7 @@ export default function MatchBox({
       <div className="relative flex flex-col items-center">
         <div className="flex justify-center items-center">
           <div
-            className={`bg-[#81209b] w-10 h-12 flex justify-center items-center -skew-x-12 [&>*]:skew-x-12`}
+            className={`bg-[#81209b] ${isFinal? 'border-y border-l' : ''} w-10 h-12 flex justify-center items-center -skew-x-12 [&>*]:skew-x-12`}
           >
             <span className="text-white text-2xl font-bold">{scoreA}</span>
           </div>

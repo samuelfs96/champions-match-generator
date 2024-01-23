@@ -16,7 +16,7 @@ function App() {
     activeRandomizerResults,
     handleRandomizeResults,
   } = useMatchup(teams);
-  
+
   return (
     <div className="bg-bgchampions w-screen h-screen bg-contain bg-center flex flex-col items-center justify-center">
       <div className="fixed top-10 left-10  bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)]">
@@ -47,6 +47,7 @@ function App() {
           {[...matchups.slice(...matchkeys(instance)[0])].map(
             ({ teamA, teamB, scoreA, scoreB }: Matchup, index: number) => (
               <MatchBox
+                isFinal={instance === Instances.FINAL}
                 key={index}
                 teamA={teamA}
                 teamB={teamB}
@@ -67,16 +68,18 @@ function App() {
               </button>
             </div>
             <div className=" bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)]">
-              <button
-                className="px-2 py-2 text-[#81209b] uppercase text-sm"
-                onClick={() => handleSetMatchups(true)}
-              >
-                <img
-                  src={next_icon}
-                  alt="refresh"
-                  className="w-8 transition-all translate-y-[2px]"
-                />
-              </button>
+              {instance !== Instances.FINAL && (
+                <button
+                  className="px-2 py-2 text-[#81209b] uppercase text-sm"
+                  onClick={() => handleSetMatchups(true)}
+                >
+                  <img
+                    src={next_icon}
+                    alt="next"
+                    className="w-8 transition-all translate-y-[2px]"
+                  />
+                </button>
+              )}
             </div>
           </div>
         ) : (
