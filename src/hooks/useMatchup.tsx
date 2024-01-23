@@ -1,25 +1,25 @@
 import { useCallback, useState } from "react";
-//import { Instances } from "../types/instances";
 import { Matchup, Team } from "../types/team";
 import { Instances } from "../types/instances";
+import {
+  createMatchup,
+  filterTeamsByBracket,
+  getRandomIndex,
+  removeUsedTeams,
+} from "../utils";
 
-function filterTeamsByBracket(teams: Team[], bracket: number): Team[] {
-  return teams.filter((team: Team) => team.bracket === bracket);
+function getRandomNumber(min: number, max: number): number {
+  const range: number = max - min;
+  const randomNumber: number = Math.floor(Math.random() * range);
+  return randomNumber + min;
 }
 
-function getRandomIndex(teams: Team[]): number {
-  return Math.floor(Math.random() * teams.length);
-}
-
-function createMatchup(teamA: Team, teamB: Team): Matchup {
-  return { teamA, teamB, scoreA: 0, scoreB: 0 };
-}
-
-function removeUsedTeams(teams: Team[], matchup: Matchup): Team[] {
-  return teams.filter(
-    (team: Team) =>
-      team.name !== matchup.teamA.name && team.name !== matchup.teamB.name
-  );
+function getForm(wins: number, losses: number, played: number) {
+  const totalMatches: number = wins + losses;
+  if (totalMatches === 0) {
+    return 0;
+  }
+  return (wins / totalMatches) * played;
 }
 
 export function useMatchup(teams: Team[]) {
@@ -32,23 +32,62 @@ export function useMatchup(teams: Team[]) {
     const bracket0Teams: Team[] = filterTeamsByBracket(currentTeams, 0);
     const bracket1Teams: Team[] = filterTeamsByBracket(currentTeams, 1);
 
-    setActiveRandomizerResults(false);
     if (bracket0Teams.length > 0 && bracket1Teams.length > 0) {
       const randomIndexA: number = getRandomIndex(bracket0Teams);
       const randomIndexB: number = getRandomIndex(bracket1Teams);
-
       const matchup: Matchup = createMatchup(
         bracket0Teams[randomIndexA],
         bracket1Teams[randomIndexB]
       );
-
       setCurrentTeams(removeUsedTeams(currentTeams, matchup));
       setMatchups([...matchups, matchup]);
       setInstance(Instances.ROUND16);
-    } else {
-      setActiveRandomizerResults(true);
     }
+    if (currentTeams.length === 2) setActiveRandomizerResults(true);
   }, [matchups, currentTeams]);
 
-  return { handleSetMatchups, matchups, instance, activeRandomizerResults };
+  const handleRandomizeResults: CallableFunction = useCallback(() => {
+    const updatedMatchups: Matchup[] = matchups.map((matchup: Matchup) => {
+      const { teamAScore, teamBScore } = getRandomScore(matchup);
+      matchup.scoreA = teamAScore;
+      matchup.scoreB = teamBScore;
+      return matchup;
+    });
+    setMatchups([...updatedMatchups]);
+  }, [matchups]);
+
+  return {
+    handleSetMatchups,
+    matchups,
+    instance,
+    activeRandomizerResults,
+    handleRandomizeResults,
+  };
+}
+
+function getRandomScore(matchup: Matchup) {
+  const { teamA, teamB } = matchup;
+
+  // goals diff
+  const teamADiff: number = teamA.gf - teamA.gc;
+  const teamBDiff: number = teamB.gf - teamB.gc;
+
+  // teams form
+  const teamAForm: number = getForm(teamA.wins, teamA.losses, teamA.played);
+  const teamBForm: number = getForm(teamB.wins, teamB.losses, teamB.played);
+
+  // index team
+  const teamAIndex: number = (teamADiff + teamAForm) / 2;
+  const teamBIndex: number = (teamBDiff + teamBForm) / 2;
+
+  // generate score
+  const teamAScore: number = getRandomNumber(0, teamAIndex + 1);
+  const teamBScore: number = getRandomNumber(0, teamBIndex + 1);
+
+  // return score
+  return {
+    matchup,
+    teamAScore,
+    teamBScore,
+  };
 }

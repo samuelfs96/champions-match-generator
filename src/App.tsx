@@ -6,7 +6,7 @@ import { teams } from "./teams";
 import { Matchup } from "./types/team";
 
 function App() {
-  const { handleSetMatchups, instance, matchups, activeRandomizerResults } =
+  const { handleSetMatchups, instance, matchups, activeRandomizerResults, handleRandomizeResults } =
     useMatchup(teams);
   return (
     <div className="bg-bgchampions w-screen h-screen bg-contain bg-center flex flex-col items-center justify-center">
@@ -35,7 +35,7 @@ function App() {
           <div className="fixed bottom-10 bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)] hover:shadow-none transition-all">
             <button
               className="px-8 py-4 text-[#81209b] uppercase text-sm"
-              onClick={() => console.log("randomizador de resultados")}
+              onClick={() => handleRandomizeResults()}
             >
               Simular Resultados
             </button>
