@@ -4,8 +4,6 @@ import { Instances } from "../types/instances";
 import {
   createMatchup,
   filterTeamsByBracket,
-  getRandomIndex,
-  removeUsedTeams,
 } from "../utils";
 
 function getRandomNumber(min: number, max: number): number {
@@ -23,7 +21,7 @@ function getForm(wins: number, losses: number, played: number) {
 }
 
 export function useMatchup(teams: Team[]) {
-  const [instance, setInstance] = useState("");
+  const [instance, setInstance] = useState(Instances.ROUND16);
   const [matchups, setMatchups] = useState<Matchup[]>([]);
   const [currentTeams, setCurrentTeams] = useState<Team[]>([...teams]);
   const [activeRandomizerResults, setActiveRandomizerResults] = useState(false);
@@ -31,20 +29,13 @@ export function useMatchup(teams: Team[]) {
   const handleSetMatchups: CallableFunction = useCallback(() => {
     const bracket0Teams: Team[] = filterTeamsByBracket(currentTeams, 0);
     const bracket1Teams: Team[] = filterTeamsByBracket(currentTeams, 1);
-
-    if (bracket0Teams.length > 0 && bracket1Teams.length > 0) {
-      const randomIndexA: number = getRandomIndex(bracket0Teams);
-      const randomIndexB: number = getRandomIndex(bracket1Teams);
-      const matchup: Matchup = createMatchup(
-        bracket0Teams[randomIndexA],
-        bracket1Teams[randomIndexB]
-      );
-      setCurrentTeams(removeUsedTeams(currentTeams, matchup));
-      setMatchups([...matchups, matchup]);
-      setInstance(Instances.ROUND16);
-    }
-    if (currentTeams.length === 2) setActiveRandomizerResults(true);
-  }, [matchups, currentTeams]);
+    const allMatchups: Matchup[] = bracket0Teams.map((teamA: Team, idx: number) => {
+      return createMatchup(teamA, bracket1Teams[idx]);
+    });
+    setMatchups(allMatchups);
+    setInstance(Instances.ROUND16);
+    setActiveRandomizerResults(true);
+  }, [currentTeams]);
 
   const handleRandomizeResults: CallableFunction = useCallback(() => {
     const updatedMatchups: Matchup[] = matchups.map((matchup: Matchup) => {
