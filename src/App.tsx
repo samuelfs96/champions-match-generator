@@ -15,6 +15,7 @@ function App() {
     matchups,
     activeRandomizerResults,
     handleRandomizeResults,
+    handleRefresh
   } = useMatchup(teams);
 
   return (
@@ -22,7 +23,7 @@ function App() {
       <div className="fixed top-10 left-10  bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)]">
         <button
           className="px-3 py-3 text-[#81209b] uppercase text-sm hover:[&>img]:rotate-90"
-          onClick={() => handleRandomizeResults()}
+          onClick={() => handleRefresh()}
         >
           <img
             src={refresh_icon}

@@ -60,12 +60,19 @@ export function useMatchup(teams: Team[]) {
     setMatchups([...updatedMatchups]);
   }, [matchups]);
 
+  const handleRefresh: CallableFunction = useCallback(() => {
+    setMatchups([]);
+    setInstance(Instances.ROUND16);
+    setActiveRandomizerResults(false);
+  }, [])
+
   return {
     handleSetMatchups,
     matchups,
     instance,
     activeRandomizerResults,
     handleRandomizeResults,
+    handleRefresh
   };
 }
 
