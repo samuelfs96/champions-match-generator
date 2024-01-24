@@ -20,7 +20,7 @@ function App() {
   } = useMatchup(teams);
 
   return (
-    <div className={`bg-bgchampions w-screen max-lg:w-auto h-screen ${instance === Instances.ROUND16 ? 'max-lg:h-auto max-lg:pt-32 max-lg:pb-28' : ''} bg-contain bg-center flex flex-col items-center justify-center`}>
+    <div className={`bg-bgchampions w-screen max-lg:w-auto h-screen ${instance === Instances.ROUND16 ? 'max-lg:h-auto max-lg:pt-32 max-lg:pb-28' : ''} bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center`}>
       <div className="fixed top-0 left-0 flex w-full justify-between p-8 z-20 max-lg:bg-[#81209b80]">
       <div className="  bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)]">
         <button
