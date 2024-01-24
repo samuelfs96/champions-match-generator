@@ -68,7 +68,7 @@ function App() {
           )}
         </div>
         {activeRandomizerResults ? (
-          <div className="fixed bottom-0 p-8 justify-center max-lg:bg-[#81209b80] z-20 flex gap-4">
+          <div className="fixed w-full bottom-0 p-8 justify-center max-lg:bg-[#81209b80] z-20 flex gap-4">
             <div className=" bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)] hover:shadow-[-5px_5px_0_0_rgba(254,48,253,0.5)] transition-all">
               <button
                 className="px-8 py-4 text-[#81209b] uppercase text-sm"
@@ -93,7 +93,7 @@ function App() {
             </div>
           </div>
         ) : (
-          <div className="fixed bottom-0 p-8 justify-center max-lg:bg-[#81209b80] z-20 flex">
+          <div className="fixed w-full bottom-0 p-8 justify-center max-lg:bg-[#81209b80] z-20 flex">
             <div className=" bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)] hover:shadow-[-5px_5px_0_0_rgba(254,48,253,0.5)] transition-all">
               <button
                 className="px-8 py-4 text-[#81209b]  uppercase text-sm"
