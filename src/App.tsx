@@ -1,5 +1,6 @@
 import "./App.css";
 import MatchBox from "./components/MatchBox";
+import AudioButton from "./components/AudioButton";
 import { useMatchup } from "./hooks/useMatchup";
 import { teams } from "./teams";
 import { Matchup } from "./types/team";
@@ -15,7 +16,7 @@ function App() {
     matchups,
     activeRandomizerResults,
     handleRandomizeResults,
-    handleRefresh
+    handleRefresh,
   } = useMatchup(teams);
 
   return (
@@ -31,6 +32,12 @@ function App() {
             className="w-6 transition-all"
           />
         </button>
+      </div>
+
+      <div className="fixed top-10 right-10  bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)]">
+        <div className="px-3 py-3 text-[#81209b] uppercase text-sm hover:[&>div]:scale-90">
+          <AudioButton />
+        </div>
       </div>
 
       <h1 className=" text-white mb-2 uppercase font-bold flex flex-col">
