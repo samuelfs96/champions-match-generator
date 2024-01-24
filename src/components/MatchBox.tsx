@@ -19,7 +19,7 @@ export default function MatchBox({
     <div
       className={`flex justify-between items-center ${
         isFinal ? "bg-[#81209b]" : ""
-      } border-[#81209b] border-[1px] px-8 py-4 gap-12 -skew-x-12 [&>*]:skew-x-12`}
+      } border-[#81209b] border-[1px] max-md:w-[380px] max-md:gap-0 px-8 py-4 gap-12 -skew-x-12 [&>*]:skew-x-12`}
     >
       <div className="flex justify-center items-center">
         <div className="flex items-center flex-col gap-1">
