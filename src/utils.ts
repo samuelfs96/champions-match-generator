@@ -35,6 +35,8 @@ export function getRandomNumber(min: number, max: number): number {
 
 export function handleNextInstance(current: string): string {
   switch (current) {
+    case Instances.START:
+      return Instances.ROUND16;
     case Instances.ROUND16:
       return Instances.QUARTER;
     case Instances.QUARTER:
@@ -42,7 +44,7 @@ export function handleNextInstance(current: string): string {
     case Instances.SEMIS:
       return Instances.FINAL;
     default:
-      return Instances.ROUND16;
+      return Instances.START;
   }
 }
 

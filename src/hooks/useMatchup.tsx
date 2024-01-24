@@ -28,13 +28,13 @@ function getNewMatchups(teams: Team[]) {
 }
 
 export function useMatchup(teams: Team[]) {
-  const [instance, setInstance] = useState<string>(Instances.ROUND16);
+  const [instance, setInstance] = useState<string>(Instances.START);
   const [matchups, setMatchups] = useState<Matchup[]>([]);
   const [activeRandomizerResults, setActiveRandomizerResults] =
     useState<boolean>(false);
 
   const handleSetMatchups: CallableFunction = useCallback(
-    (next: boolean) => {
+    (next: boolean, start: boolean) => {
       const bracket0Teams: Team[] = filterTeamsByBracket(teams, 0);
       const bracket1Teams: Team[] = filterTeamsByBracket(teams, 1);
       const winningTeams: Team[] = filterTeamsByWinner(matchups);
@@ -43,7 +43,7 @@ export function useMatchup(teams: Team[]) {
         : bracket0Teams.map((teamA: Team, idx: number) => {
             return createMatchup(teamA, bracket1Teams[idx]);
           });
-      if (next) setInstance(handleNextInstance);
+      if (next || start) setInstance(handleNextInstance);
       setMatchups(allMatchups);
       setActiveRandomizerResults(true);
     },
@@ -62,7 +62,7 @@ export function useMatchup(teams: Team[]) {
 
   const handleRefresh: CallableFunction = useCallback(() => {
     setMatchups([]);
-    setInstance(Instances.ROUND16);
+    setInstance(Instances.START);
     setActiveRandomizerResults(false);
   }, [])
 

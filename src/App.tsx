@@ -20,8 +20,9 @@ function App() {
   } = useMatchup(teams);
 
   return (
-    <div className="bg-bgchampions w-screen h-screen bg-contain bg-center flex flex-col items-center justify-center">
-      <div className="fixed top-10 left-10  bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)]">
+    <div className={`bg-bgchampions w-screen max-lg:w-auto h-screen ${instance === Instances.ROUND16 ? 'max-lg:h-auto max-lg:pt-32 max-lg:pb-28' : ''} bg-contain bg-center flex flex-col items-center justify-center`}>
+      <div className="fixed top-0 left-0 flex w-full justify-between p-8 z-20 max-lg:bg-[#81209b80]">
+      <div className="  bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)]">
         <button
           className="px-3 py-3 text-[#81209b] uppercase text-sm hover:[&>img]:rotate-90"
           onClick={() => handleRefresh()}
@@ -34,10 +35,11 @@ function App() {
         </button>
       </div>
 
-      <div className="fixed top-10 right-10  bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)]">
+      <div className="  bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)]">
         <div className="px-3 py-3 text-[#81209b] uppercase text-sm hover:[&>div]:scale-90">
           <AudioButton />
         </div>
+      </div>
       </div>
 
       <h1 className=" text-white mb-2 uppercase font-bold flex flex-col">
@@ -48,8 +50,8 @@ function App() {
       </h1>
       <div
         className={`flex justify-center mt-8 ${
-          instance === Instances.FINAL ? "" : "gap-[32rem]"
-        } items-center`}
+          instance === Instances.FINAL ? "" : "gap-[32rem] max-lg:gap-0"
+        } items-center max-lg:flex-col`}
       >
         <div className="flex flex-col gap-6">
           {[...matchups.slice(...matchkeys(instance)[0])].map(
@@ -66,7 +68,7 @@ function App() {
           )}
         </div>
         {activeRandomizerResults ? (
-          <div className="fixed bottom-10 flex gap-4">
+          <div className="fixed bottom-0 p-8 justify-center max-lg:bg-[#81209b80] z-20 flex gap-4">
             <div className=" bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)] hover:shadow-[-5px_5px_0_0_rgba(254,48,253,0.5)] transition-all">
               <button
                 className="px-8 py-4 text-[#81209b] uppercase text-sm"
@@ -91,11 +93,11 @@ function App() {
             </div>
           </div>
         ) : (
-          <div className="fixed bottom-10 flex gap-4">
+          <div className="fixed bottom-0 p-8 justify-center max-lg:bg-[#81209b80] z-20 flex">
             <div className=" bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)] hover:shadow-[-5px_5px_0_0_rgba(254,48,253,0.5)] transition-all">
               <button
                 className="px-8 py-4 text-[#81209b]  uppercase text-sm"
-                onClick={() => handleSetMatchups()}
+                onClick={() => handleSetMatchups(false, true)}
               >
                 Simular Sorteo
               </button>
