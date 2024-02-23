@@ -59,7 +59,7 @@ function App() {
         <h1 className=" text-white mb-2 uppercase font-bold flex flex-col">
           <span className="text-stroke-3 text-center text-2xl">{instance}</span>
           <span className="bg-white text-center text-black px-2">
-            champions 2023-2024
+            champions league 2023-2024
           </span>
         </h1>
       </motion.div>
