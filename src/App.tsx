@@ -28,7 +28,7 @@ function App() {
           : ""
       } bg-no-repeat bg-cover max-lg:bg-auto max-md:bg-contain max-lg:bg-repeat-y bg-center flex flex-col items-center justify-center`}
     >
-      <div className="fixed top-0 left-0 flex w-full justify-between p-8 z-20 max-lg:bg-[#81209b80]">
+      <div className="fixed top-0 left-0 flex w-full justify-between p-8 z-20">
         <div className="  bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)]">
           <button
             className="px-3 py-3 text-[#81209b] uppercase text-sm hover:[&>img]:rotate-90"
@@ -91,7 +91,7 @@ function App() {
           )}
         </div>
         {activeRandomizerResults ? (
-          <div className="fixed w-full bottom-0 p-8 justify-center max-lg:bg-[#81209b80] z-20 flex gap-4">
+          <div className="fixed w-full bottom-0 p-8 justify-center z-20 flex gap-4">
             <div className=" bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)] hover:shadow-[-5px_5px_0_0_rgba(254,48,253,0.5)] transition-all">
               <button
                 className="px-8 py-4 text-[#81209b] uppercase text-sm"
@@ -116,7 +116,7 @@ function App() {
             </div>
           </div>
         ) : (
-          <div className="fixed w-full bottom-0 p-8 justify-center max-lg:bg-[#81209b80] z-20 flex">
+          <div className="fixed w-full bottom-0 p-8 justify-center z-20 flex">
             <div className=" bg-white -skew-x-12 [&>*]:skew-x-12 shadow-[5px_5px_0_0_rgba(254,48,253,0.5)] hover:shadow-[-5px_5px_0_0_rgba(254,48,253,0.5)] transition-all">
               <button
                 className="px-8 py-4 text-[#81209b]  uppercase text-sm"
